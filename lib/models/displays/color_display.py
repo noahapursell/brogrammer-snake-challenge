@@ -21,7 +21,6 @@ class ColorDisplay(SnakeGameDisplay):
         self.screen.fill(pg.Color('black'))
         self.draw_array(game_state.board)
         pg.display.flip()
-        print("Flipped")
 
     def render_end_of_game(self, game_state: GameState):
 
@@ -43,7 +42,6 @@ class ColorDisplay(SnakeGameDisplay):
             return pg.Color(0, intensity, 0)
 
     def draw_array(self, arr):
-        print(arr)
         cell_width = 800 // arr.shape[0]
         cell_height = 800 // arr.shape[1]
         for y in range(arr.shape[0]):
