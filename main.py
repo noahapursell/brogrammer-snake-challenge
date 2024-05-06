@@ -1,12 +1,12 @@
 from lib.models.snake_game import SnakeGame
 from players.cli_player import CLIPlayer
+from lib.models.displays.cli_display import CLIDisplay
 
 if __name__ == "__main__":
     print("Main program starting")
     snake_player = CLIPlayer()
-    snake_game = SnakeGame(snake_player)
-    print(snake_game.game_board)
+    snake_display = CLIDisplay()
+    snake_game = SnakeGame(snake_player, display=snake_display, size=(3, 3))
 
-    for _ in range(10):
+    while not snake_game.died:
         snake_game.step()
-        print(snake_game.game_board)
