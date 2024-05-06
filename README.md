@@ -5,6 +5,8 @@ This is a repo to host the snake challenge for the brogrammers
 ## Installation
 It is recommended you fork this repository so you can make custom changes. 
 
+Additionally, please briefly go over `main.py` to get an understanding of project structure. 
+
 ### Installing Libraries
 This project was made with *python=3.10*. A `requirements.txt` file has been added to this project. 
 To install dependencies, run `pip install -r requirements.txt`. Make sure to do this from 
