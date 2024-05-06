@@ -6,7 +6,7 @@ if __name__ == "__main__":
     print("Main program starting")
     snake_player = CLIPlayer()
     snake_display = CLIDisplay()
-    snake_game = SnakeGame(snake_player, display=snake_display, size=(3, 3))
+    snake_game = SnakeGame(snake_player, display=snake_display, size=(3, 3), time_delay=2)
 
     while not snake_game.died:
         snake_game.step()
