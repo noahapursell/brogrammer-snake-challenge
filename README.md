@@ -8,7 +8,12 @@ It is recommended you fork this repository so you can make custom changes.
 ### Installing Libraries
 This project was made with *python=3.10*. A `requirements.txt` file has been added to this project. 
 To install dependencies, run `pip install -r requirements.txt`. Make sure to do this from 
-within your conda environment if you are using one. 
+within your conda environment if you are using one.
+
+## Usage
+Run *main.py* with `python main.py` from the project root directory (make sure you are also using the correct python environment). Once you create your own **SnakePlayer** class,
+you can use it in the main file.
+
 
 ## Project Structure
 The primary class is the *SnakeGame* class located in `lib/models/snake_game.py`. This class is responsible for managing 
@@ -16,5 +21,8 @@ a game of Snake. It takes in a *player* parameter of type *SnakePlayer* (note - 
 
 
 *SnakeGame* can also take in a optional parameter called display, which should be of type *SnakeGameDisplay* (note - this is an abstract class). An example of a *SnakeGameDisplay* class is *cli_display* located in `lib/models/displays/cli_display`. Feel free to make additional display classes.
+
+## Submission
+You will submit a **SnakePlayer** class as well as additional helper files if needed. We will discuss specifics later. 
 
 
