@@ -13,7 +13,7 @@ class BreadthFirstSearch(SnakePlayer):
     def __init__(self):
         pass
 
-    def get_action(self, game_state: GameState) -> GameState:
+    def get_action(self, game_state: GameState) -> GameAction:
         board_state = game_state.board
         target_position = np.where(board_state == SnakeGame.APPLE_SQUARE)
         # States will be storeed as tuples: (board state, head_pos) where head pos is (x, y)

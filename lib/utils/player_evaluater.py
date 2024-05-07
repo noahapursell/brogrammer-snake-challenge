@@ -54,12 +54,11 @@ class PlayerEvaluater:
 
         snake_game = SnakeGame(self.player, board_size)
         while not snake_game.died:
-            print("Running Frame")
             initial_time = time.time()
             snake_game.step()
             final_time = time.time()
 
-            frame_time = initial_time - final_time
+            frame_time = final_time - initial_time
             frame_times.append(frame_time)
             total_time += frame_time
             num_frames += 1
