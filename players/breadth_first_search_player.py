@@ -23,6 +23,9 @@ class BreadthFirstSearch(SnakePlayer):
 
         found_solution = False
         while not found_solution:
+            if state_queue.empty():
+                break
+
             current_state = state_queue.get()
             head_pos = current_state[1]
             board_state = current_state[0]
@@ -42,6 +45,7 @@ class BreadthFirstSearch(SnakePlayer):
                 
                 next_state = self.get_next_state(board_state, new_head_pos, current_state[2], move[2])
                 state_queue.put(next_state)
+        return GameAction.UP
 
     def get_next_state(self, board_state, new_head_pos, prev_first_action, current_action):
         head_value = np.max(board_state)

@@ -25,6 +25,7 @@ class SnakeGame:
         self.game_board[self.snake_pos.y, self.snake_pos.x] = self.snake_size
         self.player = player
         self.died = False  # Set to true when the player dies
+        self.won = False
         apple_pos = self.get_random_apple_location()
         self.game_board[apple_pos.y, apple_pos.x] = SnakeGame.APPLE_SQUARE
         self.display = display
@@ -55,6 +56,7 @@ class SnakeGame:
             apple_pos = self.get_random_apple_location()
             if apple_pos.x == -1 and apple_pos.y == -1:
                 self.player.notify_win()
+                self.won = True
                 self.died = True
                 return
             self.game_board[apple_pos.y, apple_pos.x] = SnakeGame.APPLE_SQUARE
