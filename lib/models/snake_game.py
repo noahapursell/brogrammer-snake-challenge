@@ -36,7 +36,7 @@ class SnakeGame:
             self.game_board, self.snake_pos, self.snake_size, self.died)
         if self.died:  # If the game is over, notify player, but then do nothing
             if self.display:
-                self.render_end_of_game(game_state)
+                self.display.render_end_of_game(game_state)
             return
         if self.display:
             self.display.render(game_state)
