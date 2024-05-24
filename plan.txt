@@ -1,0 +1,12 @@
+Plan
+
+functions:
+ - is valid move
+ - get hamitonian path
+ - get next move with bfs
+
+
+
+I can use BFS to get next move, but after getting the next move, I need to ensure a hamiltonian path exists. If it does, then I use the move.
+If it does not, then I will keep dong BFS search. If i exaust BFS search, and no new moves have been found that maintain a hamiltonian path, then 
+I default to the hamiltonian path.
