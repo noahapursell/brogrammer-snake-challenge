@@ -14,3 +14,4 @@ num_trials = 5
 player_evaluater = PlayerEvaluater(player)
 
 player_evaluater.evaluate_player(num_trials=num_trials, board_size=game_size, output_file=output, verbose=True)
+    

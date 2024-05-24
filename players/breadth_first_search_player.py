@@ -1,11 +1,13 @@
 import numpy as np
 from queue import Queue
 import copy
+from typing import Tuple
 
 from lib.models.snake_player import SnakePlayer
 from lib.models.game_state import GameState
 from lib.models.game_action import GameAction
 from lib.models.snake_game import SnakeGame
+from lib.models.point import Point
 
 class BreadthFirstSearch(SnakePlayer):
     """A class that plays snake via a bfs algorithm"""
@@ -37,11 +39,16 @@ class BreadthFirstSearch(SnakePlayer):
                 new_head_pos = (head_pos[0] + move[0], head_pos[1] + move[1])
                 if not self.is_legal_move(board_state, new_head_pos):
                     continue
-                if self.found_apple(board_state, new_head_pos):# TODO
-                    if current_state[2] is not None:
-                        return current_state[2]
+                if self.found_apple(board_state, new_head_pos): 
+                    if self.is_safe_move(board_state, new_head_pos):
+                            
+                        if current_state[2] is not None:
+                            return current_state[2]
+                        else:
+                            return move[2]
                     else:
-                        return move[2]
+                        print("NOT SAFE")
+                        continue
                 
                 next_state = self.get_next_state(board_state, new_head_pos, current_state[2], move[2])
                 state_queue.put(next_state)
@@ -62,6 +69,8 @@ class BreadthFirstSearch(SnakePlayer):
         """Return true if the apple is in the same spot as the head pos"""
         apple_square = np.where(board == SnakeGame.APPLE_SQUARE)
         #print(f"AS: {apple_square}, HP: {head_pos}")
+        # print(f"apple square: {apple_square}")
+        # print(board)
         apple_x = apple_square[0][0]
         apple_y = apple_square[1][0]
         if head_pos[1] == apple_x and head_pos[0] == apple_y:
@@ -69,6 +78,56 @@ class BreadthFirstSearch(SnakePlayer):
             pass 
         return board[head_pos[1], head_pos[0]] == SnakeGame.APPLE_SQUARE 
 
+    def is_safe_move(self, board, head_pos):
+        """Return true if the board is fully connected"""
+        # TODO
+        number_of_empty_nodes = np.count_nonzero(board == 0)
+        x, y = self.find_random_starting_node(board)
+        
+        to_see_queue = Queue()
+        is_head_found = False
+        visited = []
+        to_see_queue.put(Point(x, y))
+        while not to_see_queue.empty():
+            current_node = to_see_queue.get()
+
+            if current_node == Point(head_pos[0], head_pos[1]):
+                is_head_found = True
+                continue
+            if current_node in visited:
+                continue
+            if board[current_node.y, current_node.x] != 0:
+                continue
+            visited.append(current_node)
+            to_search = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+            for place in to_search:
+                next_node = current_node + Point(place[0], place[1])
+                if next_node.x < 0 or  next_node.y < 0:
+                    continue
+                if next_node.x >= board.shape[1] or next_node.y >= board.shape[0]:
+                    continue
+                to_see_queue.put(next_node)
+
+        if len(visited) == number_of_empty_nodes and is_head_found:
+            return True
+        else:
+
+            print(f"Visited: {len(visited)}, To see: {number_of_empty_nodes}")
+            return False
+            
+        
+        print(board)
+        return True
+
+    def find_random_starting_node(self, board) -> Tuple[int, int]:
+        max_x = board.shape[1]
+        max_y = board.shape[0]
+
+        for x in range(max_x):
+            for y in range(max_y):
+                if board[y, x] == 0:
+                    return (x, y)
+        return (-1, -1)
 
     def is_legal_move(self, board_state, new_head_pos):
         """board state should be 2d numpy array. new_head_pos is tuple (x, y)"""

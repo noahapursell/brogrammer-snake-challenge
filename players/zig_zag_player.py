@@ -9,6 +9,8 @@ class ZigZagPlayer(SnakePlayer):
 
     def get_action(self, game_state: GameState) -> GameAction:
         #TODO
+
+
         board = game_state.board
         board_dimensions = board.shape
         if board_dimensions[0] != board_dimensions[1]:
@@ -35,10 +37,10 @@ class ZigZagPlayer(SnakePlayer):
         if game_state.head_pos.x == 0 and game_state.head_pos.y == 0:
             return GameAction.RIGHT
         # If the head is at the far right column on an even row, go down
-        if game_state.head_pos.x == board_dimensions[1] - 1 and game_state.head_pos.y % 2 == 1:
+        if game_state.head_pos.x == board_dimensions[1] - 1 and game_state.head_pos.y % 2 == 0:
             return GameAction.DOWN
         # If the head is at the second from left column, and on odd row, go down
-        if game_state.head_pos.x == 1 and game_state.head_pos.y % 2 != 1:
+        if game_state.head_pos.x == 1 and game_state.head_pos.y % 2 == 1:
             return GameAction.DOWN
         # Otherwise, if head is on even row, go right
         if game_state.head_pos.y % 2 == 0:
@@ -46,6 +48,8 @@ class ZigZagPlayer(SnakePlayer):
         # If head is on odd row, go left
         if game_state.head_pos.y % 2 != 0:
             return GameAction.LEFT
+        
+        return GameAction.DOWN
 
     def move_needed_to_get_to_top_left(self, game_state: GameState) -> GameAction:
         head_pos = game_state.head_pos

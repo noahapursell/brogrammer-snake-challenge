@@ -9,3 +9,11 @@ class Point:
         if isinstance(other, Point):
             return Point(self.x + other.x, self.y + other.y)
         return NotImplemented
+    
+    def __str__(self):
+        return f"({self.x}, {self.y})"
+
+    def __eq__(self, other):
+        if self.x == other.x and self.y == other.y:
+            return True
+        return False
